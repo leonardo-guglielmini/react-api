@@ -2,6 +2,8 @@ import style from "./main.module.css"
 import Card from "./ui/Card/card"
 import basePosts from "../data/posts"
 
+//import axios from "axios"
+
 import { useState, useEffect, useRef } from 'react'
 
 const baseFormData={
