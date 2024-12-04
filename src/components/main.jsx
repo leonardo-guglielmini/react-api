@@ -1,10 +1,9 @@
 import style from "./main.module.css"
 import Card from "./ui/Card/card"
-import basePosts from "../data/posts"
 
-//import axios from "axios"
+import axios from "axios"
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect/*, useRef*/ } from 'react'
 
 const baseFormData={
     title:"",
@@ -14,16 +13,35 @@ const baseFormData={
     published:true
 }
 
+export const API_BASE_URI = 'http://localhost:3000/'
+
 export default function Main(){
 
     let tags=[]
-    const [posts, setPosts] = useState(basePosts)
+    const [posts, setPosts] = useState([])
     const [postTitle, setPostTitle] = useState("")
 
     const [formData, setFormData] = useState(baseFormData)
 
-    const isLoaded = useRef(false);
+    //const isLoaded = useRef(false);
 
+    function fetchPosts(){
+        axios.get(`${API_BASE_URI}posts`)
+            .then(res => {
+                console.log("fetch posts")
+                console.log(res.data)
+                setPosts(res.data)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }
+
+    useEffect(() => {
+        fetchPosts()
+    },[])
+
+    /*
     useEffect(() => {
         if(isLoaded.current){
             alert("Toggle Visibilità")
@@ -32,6 +50,7 @@ export default function Main(){
             isLoaded.current=true;}
             return
     },[formData.published])
+    */
 
     function handleFormData(e){
 
