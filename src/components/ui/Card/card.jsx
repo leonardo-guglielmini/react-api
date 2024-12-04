@@ -10,8 +10,6 @@ import { API_BASE_URI } from '../../main'
 import { useState } from 'react'
 
 
-const IMG_URI = `${API_BASE_URI}/imgs/posts/`
-
 export default function Card({ deletePost=()=>{}, changePostTitle=()=>{}, setPostTitle=()=>{}, title ="", image, content="",tags="", postTitle="", id}){
 
 
@@ -24,7 +22,7 @@ export default function Card({ deletePost=()=>{}, changePostTitle=()=>{}, setPos
     return(
         <div className={style.card}>
             <div className={style.col12}>
-                <img className={style.thumb} src={image ? IMG_URI + image : placeholderImg}/>
+                <img className={style.thumb} src={image ? `${API_BASE_URI}/imgs/posts/` + image : placeholderImg}/>
             </div>
             <div className={style.col12}>
                 <div className={style.cardBody}>

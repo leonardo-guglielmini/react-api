@@ -77,15 +77,22 @@ export default function Main(){
         if(formData.title === "") return
 
         const newPost ={
-            id: posts.at(-1).id+1,
             ...formData
         }
 
-        setPosts([...posts, newPost])
-        setFormData(baseFormData)
+        axios.post(`${API_BASE_URI}posts`, newPost)
+            .then(res =>{
+                console.log(res)
+                console.log("post aggiunto correttamente")
+                setPosts([...posts, res.data])
+                setFormData(baseFormData)
+            })
+            .catch(err =>{
+                console.error(err)
+            })
 
         //console.log(posts)
-        console.log("post aggiunto correttamente")
+        fetchPosts()
     }
 
     function deletePost(id){
