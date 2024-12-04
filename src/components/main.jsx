@@ -96,7 +96,14 @@ export default function Main(){
     }
 
     function deletePost(id){
-        setPosts(posts.filter(post=> post.id!=id))
+        console.log(id)
+        axios.delete(`${API_BASE_URI}posts/${id}`)
+            .then(()=>{
+                fetchPosts()
+            })
+            .catch(err =>{
+                console.error(err)
+            })
     }
 
     function changePostTitle(id){
